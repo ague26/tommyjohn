@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <title>Parking</title>
-    <link rel="canonical" href="http://parking.html">
+    <link rel="canonical" href="http://index.html">
     <link rel="manifest" href="/manifest.json">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
@@ -46,36 +46,61 @@
             x.style.display = 'none';
         }      
       };
-      function showState() {
-        var state =[
-          motorcycle = this.value,
-          fullsize = this.value,
-          minivan = this.value,
-          nyc = this.value,
-          allday = this.value
+      // function arrayForm() {
+      //   var e = document.getElementsByClassName("selection");
+      //   var strUser = e.options[e.selectedIndex].value;
+      //   console.log(strUser);
+      // };
 
-        ]
-        console.log(motorcycle);
-      }
+      // function address(){
+      //   var addressState = ["44 w 25st", "222 w 89st", "455 Broadway", "222 Varrick Ave", "1234 Poland Spring", "77 w 104", "84st 6th ave", "78979 Madison ave", "082 Park ave"]
+      //   console.log(addressState[2]);
 
-      function address(){
-        var addressState = ["44 w 25st", "222 w 89st", "455 Broadway", "222 Varrick Ave", "1234 Poland Spring", "77 w 104", "84st 6th ave", "78979 Madison ave", "082 Park ave"]
-        console.log(addressState[2]);
+      //   return addressState;
+      // };
 
-        return addressState;
-      }
+      function moto(){
+        var address;
+        var moto = document.getElementById("moto").value;
 
-      function addressList(choice){
-        switch(choice){
-          case '1':
-          document.querySelector('#adressList').innerHTML = ('test address '+'yeaight')
-          break;
-
-          default:
-          throw new Error('Invalid choice!');
+        switch(true){
+          case moto === 1:
+            address = "Available spots are located at : " + "44 w 25st " + "and " + "222 w 89st";           
+            break;
+            default:
+          address = "select again"
         }
+          document.querySelector('#adressList').innerHTML = address
+      };
 
-      }
+      function fullsize(){
+        var address;
+        var fs = document.getElementById("fs").value;
+
+        switch(true){
+          case fs === 2:
+            address = "Available spots are located at : " + "455 Broadway" + "and " + "222 Varrick Ave";           
+            break;
+            default:
+          address = "select again"
+        }
+          document.querySelector('#adressList').innerHTML = address
+         // document.getElementById("addressList").innerHTML = address;
+      };
+      function minivan(){
+        var address;
+        var mv = document.getElementById("mv").value;
+
+        switch(true){
+          case mv === 3:
+            address = "Available spots are located at : " + "1234 Poland Spring" + "and " + "77 w 104";           
+            break;
+            default:
+          address = "select again"
+        }
+          document.querySelector('#adressList').innerHTML = address
+         // document.getElementById("addressList").innerHTML = address;
+      };
 
     </script>
     
@@ -161,10 +186,11 @@
      color: black;
      width: 100%;
     }
-     .selection p{
+     .selection li{
      border: 3px solid black;
      margin-bottom: 5px;
      background-color: white;
+     list-style-type: none;
     }
     .ampstart-btn{
       margin-top: 10px;
@@ -198,14 +224,16 @@
     <div id = 'box'>
 
       <div id = 'filter-box'>
-        <form method="post" action-xhr="showState()" target="_top">
+        <form method="post" action-xhr="#" target="_top" onsubmit="return arrayForm()">
           <div class='filter'> 
             <p id='cars' onclick="showCars()">Car Size</p>
-            <amp-selector layout="container" multiple class="selection" id='carSize' style="display:none;">
+            <amp-selector layout="container"  class="selection" id='carSize' style="display:none;">
               
-                <p option="motorcycle" value="motorcycle">Motorcycle</p>
-                <p option="fullsize" value="fullsize">Fullsize</p>
-                <p option="minivan" value="minivan">Minivan</p>
+                <ul >
+                <li id = "moto" option value="1" onclick="moto()" >Motorcycle</li>
+                <li id = "fs"option value="2" onclick="fullsize()" >Fullsize</li>
+                <li id = "mv"option value="3" onclick="minivan()" >Minivan</li>
+                </ul>
              
             </amp-selector>
           </div>
@@ -213,18 +241,22 @@
           <div class='filter'> 
             <p id='where' onclick="showCities()">Park Where</p>
             <amp-selector layout="container" multiple class="selection" id='cities' style="display:none;">
-              <p option="nyc" value="nyc">New York City</p>
+              <ul>
+               <li option="nyc" value="nyc" selected>New York City</li>
+             </ul>
             </amp-selector>
           </div>
 
           <div class='filter'>
             <p id='when' onclick="showTime()"> When</p>
             <amp-selector layout="container" multiple class="selection" id='time' style="display:none;">
-              <p option="allday" value="allday">All Day</p>
+              <ul>
+               <li option="ad" value="allday" selected>All Day</li>
+             </ul>
             </amp-selector>
           </div>
-          <input type="submit" value="Find a Spot" onclick="showState()"
-          class="ampstart-btn ampstart-btn-secondary caps">
+          <!-- <input type="submit" onclick="addressList()"
+          class="ampstart-btn ampstart-btn-secondary caps"> -->
         </form>
       </div>
 
@@ -238,7 +270,7 @@
   
 
     <amp-install-serviceworker src="sw.js"
-      data-iframe-src="http://localhost:3000/Parking.html"
+      data-iframe-src="http://localhost:3000/index.html"
       layout="nodisplay">
     </amp-install-serviceworker>
    
