@@ -1,0 +1,22 @@
+{
+  "short_name": "Parking",
+  "name": "TommyJohn-Parking",
+  "icons": [
+    {
+      "src": "letterP.jpg",
+      "type": "image/jpg",
+      "sizes": "48x48"
+    },
+    {
+      "src": "letterP.jpg",
+      "type": "image/jpg",
+      "sizes": "96x96"
+    },
+    {
+      "src": "letterP.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "Parking.html?launcher=true"
+}

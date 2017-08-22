@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <title>Hello, AMPs</title>
+    <title>Parking</title>
     <link rel="canonical" href="http://parking.html">
+    <link rel="manifest" href="/manifest.json">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
       {
@@ -17,6 +18,51 @@
         ]
       }
     </script>
+    <script async custom-element="amp-install-serviceworker"
+    src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+    <script>
+      function showCars() {
+        var x = document.getElementById('carSize');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }      
+      };
+      function showCities() {
+        var x = document.getElementById('cities');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }      
+      };
+      function showTime() {
+        var x = document.getElementById('time');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }      
+      };
+      function showState() {
+        var state =[
+          motorcycle = this.value,
+          fullsize = this.value,
+          minivan = this.value,
+          nyc = this.value,
+          allday = this.value
+
+        ]
+      }
+
+      function address(){
+        var x = document.getElementById('addressList');
+      }
+
+    </script>
+    
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
     <style amp-custom>
@@ -73,17 +119,48 @@
         width: inherit;
       }
      .filter{
-      border: 3px solid black;
       display: inline-block;
-      height: 16%;
-      width:26%;
+      height: 15%;
+      width:25%;
       text-align: center;
       padding-top: 10px;
       color: white;
       font-size:18px;
       font-weight: 600;
-
+      vertical-align: top;
      }
+    .filter p:nth-child(1){
+      border: 2px solid black;
+
+    }
+
+    amp-selector [option][selected] {
+    border: solid 3px red;
+    cursor: pointer;
+    }
+     
+    .selection{
+     margin-top: 2px;
+     width:26%;
+     color: black;
+     width: 100%;
+    }
+     .selection p{
+     border: 3px solid black;
+     margin-bottom: 5px;
+     background-color: white;
+    }
+    .ampstart-btn{
+      margin-top: 10px;
+      width:20%;
+      font-size: 18px;
+    }
+
+    #address{
+      height:25vh;
+      width:100vw;
+      background-color: white;
+    }
     </style>
 
   </head>
@@ -105,14 +182,49 @@
     <div id = 'box'>
 
       <div id = 'filter-box'>
-        <p class='filter' id='carSize'> Car Size</p>
-    
-        <p class='filter' id='where'> Park Where</p>
+        <form method="post" action-xhr="showState()" target="_top">
+          <div class='filter'> 
+            <p id='cars' onclick="showCars()">Car Size</p>
+            <amp-selector layout="container" multiple class="selection" id='carSize' style="display:none;">
+              
+                <p option="motorcycle" value="motorcycle">Motorcycle</p>
+                <p option="fullsize" value="fullsize">Fullsize</p>
+                <p option="minivan" value="minivan">Minivan</p>
+             
+            </amp-selector>
+          </div>
+      
+          <div class='filter'> 
+            <p id='where' onclick="showCities()">Park Where</p>
+            <amp-selector layout="container" multiple class="selection" id='cities' style="display:none;">
+              <p option="nyc" value="nyc">New York City</p>
+            </amp-selector>
+          </div>
 
-        <p class='filter' id='when'> When</p>
+          <div class='filter'>
+            <p id='when' onclick="showTime()"> When</p>
+            <amp-selector layout="container" multiple class="selection" id='time' style="display:none;">
+              <p option="allday" value="allday">All Day</p>
+            </amp-selector>
+          </div>
+          <input type="submit" value="Find a Spot" onclick=""
+          class="ampstart-btn ampstart-btn-secondary caps">
+        </form>
       </div>
 
     </div>
+
+    <div id='address'>
+      <p id='adressList'>
+      </p>
+    </div>
+    
+  
+
+    <amp-install-serviceworker src="sw.js"
+      data-iframe-src="http://localhost:3000/Parking.html"
+      layout="nodisplay">
+    </amp-install-serviceworker>
    
 
     
