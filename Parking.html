@@ -55,10 +55,26 @@
           allday = this.value
 
         ]
+        console.log(motorcycle);
       }
 
       function address(){
-        var x = document.getElementById('addressList');
+        var addressState = ["44 w 25st", "222 w 89st", "455 Broadway", "222 Varrick Ave", "1234 Poland Spring", "77 w 104", "84st 6th ave", "78979 Madison ave", "082 Park ave"]
+        console.log(addressState[2]);
+
+        return addressState;
+      }
+
+      function addressList(choice){
+        switch(choice){
+          case '1':
+          document.querySelector('#adressList').innerHTML = ('test address '+'yeaight')
+          break;
+
+          default:
+          throw new Error('Invalid choice!');
+        }
+
       }
 
     </script>
@@ -207,7 +223,7 @@
               <p option="allday" value="allday">All Day</p>
             </amp-selector>
           </div>
-          <input type="submit" value="Find a Spot" onclick=""
+          <input type="submit" value="Find a Spot" onclick="showState()"
           class="ampstart-btn ampstart-btn-secondary caps">
         </form>
       </div>
